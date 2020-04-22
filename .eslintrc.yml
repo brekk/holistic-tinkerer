@@ -1,0 +1,9 @@
+root: true
+parser: babel-eslint
+settings:
+  react:
+    version: detect
+extends:
+  - eslint-config-sorcerers
+  - plugin:prettier/recommended
+  - plugin:react/recommended
