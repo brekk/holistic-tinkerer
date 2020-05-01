@@ -1,33 +1,46 @@
-const R = require("ramda")
-const adjustFirst = R.curry((fn, z) => fn(z[0]) + z.slice(1))
-const capitalize = adjustFirst(R.toUpper)
-const lowerFirst = adjustFirst(R.toLower)
+import getMethodBody from "../selectors/accessors/get-method-body"
+import getMethodName from "../selectors/accessors/get-method-name"
+import getMethodParams from "../selectors/accessors/get-method-params"
+import getClassName from "../selectors/accessors/get-class-name"
+
 export default function transformer(file, api) {
   const jjj = api.jscodeshift
-  const news = []
-  const sourcy = (zz) => jjj(zz).toSource()
-
+  const state = {}
+  const funcs = []
   jjj(file.source)
     .find(jjj.MethodDefinition)
     .forEach((z) => {
-      const body = R.path(["value", "value", "body"], z)
-      const className = R.path(["parent", "parent", "value", "id", "name"], z)
-      const fnName = R.path(["value", "key", "name"], z)
+      const methodName = getMethodName(z)
+      if (methodName === "constructor") {
+        state[z.parent.parent.value.id.name + "Constructor"] = [
+          getMethodParams(z),
+          getMethodBody(z)
+        ]
+      }
+    })
+    .forEach((x) => {
+      const methodName = getMethodName(x)
+      const className = getClassName(x)
+      const name = methodName.replace("render", className)
+      const isRender = methodName === "render"
+      const hasConstructor = state[className + "Constructor"]
+      const params = getMethodParams(x)
+      const body = getMethodBody(x)
+      const funcBody = jjj.arrowFunctionExpression(
+        params,
+        isRender && hasConstructor
+          ? jjj.blockStatement([hasConstructor[1], body])
+          : body
+      )
 
-      const methodName = capitalize(fnName)
-      const nname = className + methodName
-      const newName = R.pipe(lowerFirst, jjj.identifier)(nname)
-      // console.log("body", JSON.stringify(body, null, 2));
-      const prependedBody = body
-      const params = R.path(["value", "value", "params"], z)
-      const funcBody = jjj.arrowFunctionExpression(params, prependedBody)
-      news.push(
+      const newName = jjj.identifier(isRender ? className : name)
+      if (name === "constructor") return
+      funcs.push(
         jjj.variableDeclaration("const", [
           jjj.variableDeclarator(newName, funcBody)
         ])
       )
     })
     .remove()
-
-  return news.map(sourcy).join("\n\n")
+  return funcs.map((zz) => jjj(zz).toSource()).join("\n\n")
 }

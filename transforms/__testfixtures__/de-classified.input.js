@@ -1,8 +1,20 @@
-class Simple {
-  simple() {
-    console.log("the content is atrocious")
-    console.log("1")
-    console.log("2")
-    console.log("3")
+class Gross extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isMemoEditing: false,
+      status: "init",
+      isMemoVisible: props.ad.memo,
+      recosVisible: false
+    }
+  }
+  renderSubElement({ children }) {
+    return <strong>{children}</strong>
+  }
+  renderOther() {
+    return <strong>shit</strong>
+  }
+  render() {
+    return <div>{this.renderSubElement("codesmell")}</div>
   }
 }

@@ -1577,6 +1577,14 @@ callsites@^3.0.0:
   resolved "https://nexus.es.ecg.tools/repository/npm-all/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
+camel-case@^4.1.1:
+  version "4.1.1"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/camel-case/-/camel-case-4.1.1.tgz#1fc41c854f00e2f7d0139dfeba1542d6896fe547"
+  integrity sha512-7fa2WcG4fYFkclIvEmxBbTvmibwF2/agfEBc6q3lOpVu0A13ltLsA+Hr/8Hp6kp5f+G7hKi6t8lys6XxP+1K6Q==
+  dependencies:
+    pascal-case "^3.1.1"
+    tslib "^1.10.0"
+
 camelcase@^5.0.0, camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
@@ -1626,6 +1634,11 @@ chalk@^3.0.0:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
+
+chance@^1.0.18:
+  version "1.1.4"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/chance/-/chance-1.1.4.tgz#d8743bf8e40bb05e024c305ca1ff441195eb23db"
+  integrity sha512-pXPDSu3knKlb6H7ahQfpq//J9mSOxYK8SMtp8MV/nRJh8aLRDIl0ipLH8At8+nVogVwtvPZzyIzY/EbcY/cLuQ==
 
 chardet@^0.7.0:
   version "0.7.0"
@@ -2002,6 +2015,14 @@ end-of-stream@^1.1.0:
   integrity sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==
   dependencies:
     once "^1.4.0"
+
+ensorcel@^0.0.2:
+  version "0.0.2"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/ensorcel/-/ensorcel-0.0.2.tgz#0600a8093a4c5e2b0a4b936bce7b82488553bfe1"
+  integrity sha512-hlp/4NwyCAdNtvQwirMQPFqwt1SFLia/LaiGNxixLA1eurPsALZoClUNa+8KunQk4aP+1nvTqoRui9Z4c90Gzw==
+  dependencies:
+    fluture "^12.1.1"
+    ramda "^0.26.1"
 
 error-ex@^1.2.0, error-ex@^1.3.1:
   version "1.3.2"
@@ -2644,6 +2665,14 @@ flow-parser@0.*:
   version "0.123.0"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/flow-parser/-/flow-parser-0.123.0.tgz#0fbcf4283335fca86d4cb2cf674dfbc5092a4efc"
   integrity sha512-scMjcsICxtHm141rFTfWgKnNbz9MUubgc9kNSh+0xvTYIA/L+9AzlPRK0FMcfNiqQTWjn0IMGqiwySLzMZVvtw==
+
+fluture@^12.1.1:
+  version "12.2.0"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/fluture/-/fluture-12.2.0.tgz#40de127c88a4cb845b9f2292b89b91f53784a6bc"
+  integrity sha512-3Hs5gGA5/o1Fkz7jXndR6FStKD3VXJdto8WWvSMY5MRm0u6tJ51kxn/V+hpbSkkSlYd7TZ0hUVJ07iJPP7DS2w==
+  dependencies:
+    sanctuary-show "^2.0.0"
+    sanctuary-type-identifiers "^2.0.0"
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -3885,6 +3914,13 @@ loose-envify@^1.0.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lower-case@^2.0.1:
+  version "2.0.1"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/lower-case/-/lower-case-2.0.1.tgz#39eeb36e396115cc05e29422eaea9e692c9408c7"
+  integrity sha512-LiWgfDLLb1dwbFQZsSglpRj+1ctGnayXz3Uv0/WO8n558JycT5fg6zkNcnW0G68Nn0aEldTFeEfmjCfmqry/rQ==
+  dependencies:
+    tslib "^1.10.0"
+
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
@@ -4020,6 +4056,11 @@ mute-stream@0.0.8:
   resolved "https://nexus.es.ecg.tools/repository/npm-all/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
+nan@^2.0.0:
+  version "2.14.1"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
+  integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -4051,6 +4092,14 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+
+no-case@^3.0.3:
+  version "3.0.3"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/no-case/-/no-case-3.0.3.tgz#c21b434c1ffe48b39087e86cfb4d2582e9df18f8"
+  integrity sha512-ehY/mVQCf9BL0gKfsJBvFJen+1V//U+0HQMPrWct40ixE4jnv0bfvxDbWtAHL9EcaPEOJHVVYKoQn1TlZUB8Tw==
+  dependencies:
+    lower-case "^2.0.1"
+    tslib "^1.10.0"
 
 node-dir@^0.1.17:
   version "0.1.17"
@@ -4120,6 +4169,13 @@ npm-run-path@^4.0.0:
   integrity sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
   dependencies:
     path-key "^3.0.0"
+
+nsfw@^1.2.5:
+  version "1.2.9"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/nsfw/-/nsfw-1.2.9.tgz#e49ff5c12593cbcce3fcc90c533947eb4f15a99a"
+  integrity sha512-/2o89nygBRTTnGRxSHt2wjagbszyh36HlgF61Ec2iaJBTIIQ6QKcqp92EzVxxZX9U/6Qpy+LZL5i8532hXzAHg==
+  dependencies:
+    nan "^2.0.0"
 
 nwsapi@^2.2.0:
   version "2.2.0"
@@ -4335,6 +4391,14 @@ parse5@5.1.0:
   version "5.1.0"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/parse5/-/parse5-5.1.0.tgz#c59341c9723f414c452975564c7c00a68d58acd2"
   integrity sha512-fxNG2sQjHvlVAYmzBZS9YlDp6PTSSDwa98vkD4QgVDDCAo84z5X1t5XyJQ62ImdLXx5NdIIfihey6xpum9/gRQ==
+
+pascal-case@^3.1.1:
+  version "3.1.1"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/pascal-case/-/pascal-case-3.1.1.tgz#5ac1975133ed619281e88920973d2cd1f279de5f"
+  integrity sha512-XIeHKqIrsquVTQL2crjq3NfJUxmdLasn3TYOU0VBM+UX2a6ztAWBlJQBePLGY7VHW8+2dRadeIPK5+KImwTxQA==
+  dependencies:
+    no-case "^3.0.3"
+    tslib "^1.10.0"
 
 pascalcase@^0.1.1:
   version "0.1.1"
@@ -4561,6 +4625,11 @@ ramda@0.25.0:
   version "0.25.0"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
   integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
+
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
 
 ramda@^0.27.0:
   version "0.27.0"
@@ -4894,6 +4963,16 @@ safe-regex@^1.1.0:
   version "2.1.2"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
+
+sanctuary-show@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/sanctuary-show/-/sanctuary-show-2.0.0.tgz#2326b4744f4b0f993f18ca56a29f68a50f514637"
+  integrity sha512-REj4ZiioUXnDLj6EpJ9HcYDIEGaEexmB9Fg5o6InZR9f0x5PfnnC21QeU9SZ9E7G8zXSZPNjy8VRUK4safbesw==
+
+sanctuary-type-identifiers@^2.0.0:
+  version "2.0.1"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/sanctuary-type-identifiers/-/sanctuary-type-identifiers-2.0.1.tgz#fc524cf6dd92cebfcbb0dd9509eff193159a20ed"
+  integrity sha1-/FJM9t2Szr/LsN2VCe/xkxWaIO0=
 
 sane@^4.0.3:
   version "4.1.0"
@@ -5357,10 +5436,155 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
+text-camel-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-camel-case/-/text-camel-case-1.0.0.tgz#0535b49e358f3f5aa74394d7ccd70799fa29071b"
+  integrity sha512-MS/D4PsPssZKpOXA0A5MqRsxhnifO2Pi7Ftj5usK0VNtf0HzAXBQ+RID7rXVfG019RXfDmULpXnITwE9BVcgHg==
+  dependencies:
+    text-pascal-case "^1.0.1"
+
+text-capital-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-capital-case/-/text-capital-case-1.0.0.tgz#d2b65c3fe5d4fd8ee41a3354423606d0758ad916"
+  integrity sha512-BKb7sB8s5VUAYqOPVzLzTVxk2e5fis6UObTS7P0SbPiEWBAfRGXraU279qFQpzCN0VmZdg0RHJcSa/JFxlbG2A==
+  dependencies:
+    text-no-case "^1.0.0"
+    text-upper-case-first "^1.0.0"
+
+text-case@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/text-case/-/text-case-1.0.7.tgz#6ac56a772b8c58059f44c37ac4332c7a2048d02a"
+  integrity sha512-2LYPBVKxr5QjZd6oAW2hqPLdGYf5sWdqPQyGV9qk4UnIIPstOmcOE8xIPelGBxZsvk+c9vpa5L2rcFu1MPgf/Q==
+  dependencies:
+    text-camel-case "^1.0.0"
+    text-capital-case "^1.0.0"
+    text-constant-case "^1.0.0"
+    text-dot-case "^1.0.0"
+    text-header-case "^1.0.0"
+    text-is-lower-case "^1.0.0"
+    text-is-upper-case "^1.0.0"
+    text-lower-case "^1.0.2"
+    text-lower-case-first "^1.0.0"
+    text-no-case "^1.0.0"
+    text-param-case "^1.0.0"
+    text-pascal-case "^1.0.1"
+    text-path-case "^1.0.0"
+    text-sentence-case "^1.0.0"
+    text-snake-case "^1.0.0"
+    text-swap-case "^1.0.0"
+    text-title-case "^1.0.0"
+    text-upper-case "^1.0.0"
+    text-upper-case-first "^1.0.0"
+
+text-constant-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-constant-case/-/text-constant-case-1.0.0.tgz#cac0d94c0bf5d0723e62476f557b64d9eb4c95db"
+  integrity sha512-51JRTNI/Q0g2D5e/GzQqmdLqq+katl0XJaGB1/MoAVC6VANGApq26d5Z8vlS10CURmKdQmBdX+ZD1xPsI9EuLA==
+  dependencies:
+    text-no-case "^1.0.0"
+    text-upper-case "^1.0.0"
+
+text-dot-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-dot-case/-/text-dot-case-1.0.0.tgz#03b8a56b4681c2ad83d4220088f44d64b53662ac"
+  integrity sha512-yrPbTOy0+jLotuF7XqMo4tvdNmO60BA6KQ9BCG3aE9wQaPQSdjidn+Pi/w/fafcoAJvpmFWOeDOEwLuEeilv5Q==
+  dependencies:
+    text-no-case "^1.0.0"
+
+text-header-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-header-case/-/text-header-case-1.0.0.tgz#75d7a0e57e360cd49fad928abb532e0f98d68f78"
+  integrity sha512-dlaqskkK1taWFeyKL0OTlDOAaAEX4zlZ7vq05ga19I8VJi+SVQFEXzjp8JUbwR6+hu/KTqVH0GIY2d4C4SE3Kg==
+  dependencies:
+    text-capital-case "^1.0.0"
+
+text-is-lower-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-is-lower-case/-/text-is-lower-case-1.0.0.tgz#30c04a62f1c881d34257b252cb2fa422e72ebecb"
+  integrity sha512-fIG8fnsMkzC/gdDs8j5prSqrRpB0w42VNJYZAopGAcx+fTyFrTE1T4kW32PXdUiPtY8G9MtwESrMZ6yc00eiUQ==
+
+text-is-upper-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-is-upper-case/-/text-is-upper-case-1.0.0.tgz#637113f81e52656095d8fbed11aeebb44f93eea0"
+  integrity sha512-YqIdM+BvVN/P3d9J1+Fz+dR27RihdHjM6K4rbeypkz6q9Cgw4+vDdpwypTAWxFqlt+bQXt/UkSerIjgZE44eVw==
+
+text-lower-case-first@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-lower-case-first/-/text-lower-case-first-1.0.0.tgz#b840d0b5230f14a7c852e5a7adfaf7fe5c7efee3"
+  integrity sha512-cb8ThKh6zyOjwfgMLzyD3wTkYIiKeMIe1sOHFSVrtDAIJUrqGuMafVSCFX4nqWObvvUkV2LDTKyuven6YhuaUg==
+
+text-lower-case@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/text-lower-case/-/text-lower-case-1.0.2.tgz#af0bb92bd28ce05413584a41dce4ed6a22449e16"
+  integrity sha512-XxEJsguBeeZvge4QbC3ynTbIf991JzKchHzF4OSPvYJ4sB5L6+AnN06ZvwJG1hf5ok20PNyZjmCHGCdgP3+mvw==
+
+text-no-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-no-case/-/text-no-case-1.0.0.tgz#9e7aa71f97a18ad696ad39934e526cd42873f18d"
+  integrity sha512-tnjqgyLbrEtKghXWdRPHjZRilw05oPLwvYmt6NHqZDE5C8xbyuOknF56UtsXa9hpRKtz5jOA3GTXPweC20qjXA==
+  dependencies:
+    text-lower-case "^1.0.2"
+
+text-param-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-param-case/-/text-param-case-1.0.0.tgz#3d5aa62140b0566275c2b03dc976b4637745bc88"
+  integrity sha512-zRI28vRDftxO/cKxAJBCRMHe2xbBPrib06x/HLGvmtTb4b1hslt3f3eAs7EYepZl7Q2cRC5810L+/YDmZPkXeQ==
+  dependencies:
+    text-dot-case "^1.0.0"
+
+text-pascal-case@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/text-pascal-case/-/text-pascal-case-1.0.1.tgz#850b8e3d1df9160921beee36f76bc1756dbee913"
+  integrity sha512-d4Uw5gpdc+vRmWeKuGETu1Ljt1bt2fntU6Z1WAjHyunLkkdKmPSy0shv2+19SdFKeClgaLXsZecChs9Ch8jc5A==
+  dependencies:
+    text-no-case "^1.0.0"
+
+text-path-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-path-case/-/text-path-case-1.0.0.tgz#97fda16247c440585dccd364cb8e8fc2a60c3dad"
+  integrity sha512-DhrVk7Q+fXhhqeAJ/gx2bqERSRHXo4ayWi87v0qZLMXKixmTdUPdFIzznGmWIjOCmM7zwb5unjAnj/7vUclRGQ==
+  dependencies:
+    text-dot-case "^1.0.0"
+
+text-sentence-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-sentence-case/-/text-sentence-case-1.0.0.tgz#bcde31ee20da623ebf3505bfb749c2e086bc08a7"
+  integrity sha512-Ub2DMohLkxF/ITmKrT68bH3KeVqQczyqzMTda4sMq9QHDJ7qkLkBJJbPmADsG1izSLs1uWCJR4AA0e9F/iAdjw==
+  dependencies:
+    text-no-case "^1.0.0"
+    text-upper-case-first "^1.0.0"
+
+text-snake-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-snake-case/-/text-snake-case-1.0.0.tgz#2e97d0271c6dac8189032996484a6d3810e4fafe"
+  integrity sha512-yMOrixNa2ldTQEhjXEccnH+gHZN2ainnTL+rR82f8iBCyiX6jZEIajz6IGj5hGN2X/Ey/jV3eIn/1/MsSpFXuA==
+  dependencies:
+    text-dot-case "^1.0.0"
+
+text-swap-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-swap-case/-/text-swap-case-1.0.0.tgz#bc131094ee6b56f7499f9b6dea66da74afa2f2b6"
+  integrity sha512-AL9Gibn9bnEr+RoIm8Emgrp2qwC6KS45uVZ7vbTzDcPpL0IYeSwl+GTuw8IQJSqZXkCdmQ7Q4qW/mW5AauCPzA==
+
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+text-title-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-title-case/-/text-title-case-1.0.0.tgz#eec39c0c53ee15632f430fb6a997657d100e1b29"
+  integrity sha512-gGnxQReppMnerqRULNiiMzSxzVs/7GrXLO5v4kmecaM22fxceYj5+M2UcIs+E/wLcz0JNYTEO6/AKXiGig8HEg==
+
+text-upper-case-first@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-upper-case-first/-/text-upper-case-first-1.0.0.tgz#5f6bdb5c6f157e80de8c34087c5fa65caafa077b"
+  integrity sha512-mv1ax37VmGuFc7yoRehq7kHzoN96/5bBY3iFY1qIX8w0uYBFCCGyqcFIhJ4Th49jVB/RX/AVxUt5+XT2wMqNcA==
+
+text-upper-case@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/text-upper-case/-/text-upper-case-1.0.0.tgz#d38ced810c6d27ea38d4ed57e72cdc99d4476f85"
+  integrity sha512-koaPA42/5/TBO7nsLoLeTIbn48TOGcCTz45cUjEfd+nqWek1QSm6xZnVhtUsNFtQaVBvdSnUCPGkNBG86Gbntg==
 
 throat@^5.0.0:
   version "5.0.0"
@@ -5421,6 +5645,18 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
+torpor@^0.0.4:
+  version "0.0.4"
+  resolved "https://nexus.es.ecg.tools/repository/npm-all/torpor/-/torpor-0.0.4.tgz#960f20c69886a43f37820e893f9cb897e03b7435"
+  integrity sha512-QkhhZdvvA4Z85gmYyQt5yWyY3DMyCxD6Y0nBip8izPfX4/dHhN+5sjaQooDdLS8fHF/AKKBekXtOVSZfjGtvnA==
+  dependencies:
+    camel-case "^4.1.1"
+    chance "^1.0.18"
+    ensorcel "^0.0.2"
+    fluture "^12.1.1"
+    nsfw "^1.2.5"
+    ramda "^0.26.1"
+
 tough-cookie@^2.3.3, tough-cookie@~2.5.0:
   version "2.5.0"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/tough-cookie/-/tough-cookie-2.5.0.tgz#cd9fb2a0aa1d5a12b473bd9fb96fa3dcff65ade2"
@@ -5445,7 +5681,7 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.9.0:
   version "1.11.1"
   resolved "https://nexus.es.ecg.tools/repository/npm-all/tslib/-/tslib-1.11.1.tgz#eb15d128827fbee2841549e171f45ed338ac7e35"
   integrity sha512-aZW88SY8kQbU7gpV19lN24LtXh/yD4ZZg6qieAJDDg+YBsJcSmLGK9QpnUjAKVG/xefmvJGd1WUmfpT/g6AJGA==

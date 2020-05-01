@@ -1,7 +1,3 @@
-import { defineTest } from "jscodeshift/dist/testUtils"
-jest.autoMockOff()
-describe("de-classified", () => {
-  describe("Class with renderChild", () => {
-    defineTest(__dirname, "de-classified")
-  })
-})
+import { namedTest } from "../../tools/testing"
+
+namedTest("de-classified", __dirname, "converts Component with renderSubComponent")

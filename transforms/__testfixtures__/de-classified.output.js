@@ -1,6 +1,15 @@
-const simpleSimple = () => {
-  console.log("the content is atrocious")
-  console.log("1")
-  console.log("2")
-  console.log("3")
-};
+const GrossSubElement = ({ children }) => <strong>{children}</strong>
+const GrossOther = () => <strong>shit</strong>
+const Gross = (props) => {
+  this.state = {
+    isMemoEditing: false,
+    status: "init",
+    isMemoVisible: props.ad.memo,
+    recosVisible: false
+  }
+  return (
+    <div>
+      <SubElement>{"codesmell"}</SubElement>
+    </div>
+  )
+}

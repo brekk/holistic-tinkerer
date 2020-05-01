@@ -3,7 +3,8 @@
   "dependencies": {
     "jscodeshift": "^0.7.0",
     "jscodeshift-helper": "^1.1.0",
-    "ramda": "^0.27.0"
+    "ramda": "^0.27.0",
+    "torpor": "^0.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -24,6 +25,10 @@
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^25.4.0",
     "prettier": "^2.0.5",
-    "prettier-eslint": "^9.0.1"
+    "prettier-eslint": "^9.0.1",
+    "text-case": "^1.0.7"
+  },
+  "scripts": {
+    "start": "nps"
   }
 }
