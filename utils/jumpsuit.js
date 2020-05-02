@@ -1,49 +1,216 @@
-const C = Object.freeze({ $: "@@scovilles", NIL: "@@NIL@@" })
-const { $, NIL } = C
+const C = Object.freeze({
+  $: "@@FUTILITY::constant.magic",
+  UNMATCHED: "@@FUTILITY::constant.unmatched"
+})
+const { $, UNMATCHED } = C
+const isUnmatched = (x) => x === UNMATCHED
+const mash = (a, b) => Object.assign({}, a, b)
 
-const addSpice = (taste) => (aa, bb) =>
+const last = (x) => x[x.length - 1]
+const smooth = (x) => x.filter((y) => y)
+const concat = (a, b) => a.concat(b)
+const identity = (y) => y
+const memoizeWith = (memoizer) => (fn) => {
+  const saved = {}
+  const memoized = (...args) => {
+    const mem = memoizer(args)
+    if (mem && saved[mem]) return saved[mem]
+    saved[mem] = fn(...args)
+    return saved[mem]
+  }
+  return memoized
+}
+
+const defaultMemoizer = ([x, y]) => x.concat(y).join("-")
+
+export const makeTypechecker = (typecheck, memo = defaultMemoizer) =>
+  memoizeWith(memo)((expected, given) => {
+    if (!Array.isArray(expected) || !Array.isArray(expected)) {
+      throw new TypeError(
+        "makeTypechecker needs two valid lists of types to run"
+      )
+    }
+    const returnType = expected[expected.length - 1]
+    const params = expected.slice(0, expected.length - 1)
+
+    const results = params
+      .slice(0, given.length)
+      .map((ex, ii) => {
+        const actual = typecheck(given[ii])
+        return {
+          idx: ii,
+          raw: Object.freeze({ value: given[ii] }),
+          actual,
+          expected: ex,
+          success: actual === ex
+        }
+      })
+      .reduce(
+        (outcome, ent) => {
+          const key = ent.success ? "valid" : "invalid"
+
+          const partial = mash(outcome, {
+            [key]: concat(outcome[key], [ent]),
+            rawParams: concat(outcome.rawParams, [ent])
+          })
+          return mash(partial, {
+            failures: outcome.failures || partial.invalid.length > 0
+          })
+        },
+        {
+          rawParams: [],
+          invalid: [],
+          valid: [],
+          signature: expected.join(" -> "),
+          params,
+          returnType,
+          given
+        }
+      )
+    return results
+  })
+
+const typeSystem = (z) => {
+  const tt = typeof z
+  return tt
+}
+const checkTypesValid = (checker) => (a, b) =>
+  !makeTypechecker(checker)(a, b).failures
+const checkReturnTypeValid = (checker) => (given) => (a, b) =>
+  checker(given) === makeTypechecker(checker)(a, b).returnType
+
+const makeParamMerger = (taste) => (aa, bb) =>
   aa.map((yy) => (taste(yy) && bb[0] ? bb.shift() : yy)).concat(bb)
-const testSpice = (taste) => (args) =>
+const testCurryGaps = (taste) => (args) =>
   args.reduce((pp, x) => (taste(x) ? pp : pp + 1), 0)
 const some = (fn) => (x) => x.some(fn)
 
 const toString = (fn, args = []) => () =>
-  `curry(${fn.toString()})${args.length > 0 ? `(${args.join(`,`)})` : ``}`
+  `curry(${fn.name})${args.length > 0 ? `(${args.join(`,`)})` : ``}`
 
-const curryPowder = (test) => (fn) => {
-  const heat = testSpice(test)
-  const mergeParams = addSpice(test)
+const hmError = (name, actual, params) =>
+  `Given ${name}( ${
+    actual && actual.join(", ")
+  } ) but expected ${name}( ${params.slice(0, actual.length).join(", ")} )`
+
+const grimoire = (test) => ({ ts = typeSystem, n: givenLength, hm, check }) => (
+  fn
+) => {
+  const heat = testCurryGaps(test)
+  const mergeParams = makeParamMerger(test)
   const isSpicy = some(test)
+  let tChecker = false
   function curried(...args) {
+    if (check && !checkTypesValid(ts)(hm, args)) {
+      tChecker = makeTypechecker(ts)(hm, args)
+      const { rawParams, params } = tChecker
+      throw new TypeError(
+        hmError(
+          fn.name,
+          rawParams.map((z) => z.actual),
+          params
+        )
+      )
+    }
+    const nArgs =
+      hm && Array.isArray(hm)
+        ? hm.length - 1
+        : givenLength && typeof givenLength === "number"
+        ? givenLength
+        : fn.length
     const length = isSpicy(args) ? heat(args) : args.length
     function saucy(...args2) {
       return curried.apply(this, mergeParams(args, args2))
     }
     saucy.toString = toString(fn, args)
-    return length >= fn.length ? fn.apply(this, args) : saucy
+    if (length >= nArgs) {
+      const result = fn.apply(this, args)
+      if (check) {
+        if (!checkReturnTypeValid(ts)(result)(hm, args)) {
+          tChecker = tChecker || makeTypechecker(ts)(hm, args)
+          const { returnType } = tChecker
+          throw new TypeError(
+            `Expected ${
+              fn.name
+            } to return ${returnType} but got ${typeof result}.`
+          )
+        }
+      }
+      return result
+    }
+    return saucy
   }
   curried.toString = toString(fn)
   return curried
 }
-const TEST_FOR_CURRY_POWDER = (x) => x === $
-const curry = curryPowder(TEST_FOR_CURRY_POWDER)
-const J = {
+const PLACEHOLDER = (x) => x === $
+const def = grimoire(PLACEHOLDER)
+const curry = def({ n: false, check: false })
+const curryN = curry((nn, fn) => def({ n: nn, check: false })(fn))
+const any = curry((fn, xx) => xx.some(fn))
+
+const isType = curry((exp, xx) => typeof xx === exp)
+const [
+  isString,
+  isNumber,
+  isUndefined,
+  isFunction,
+  isBoolean,
+  isSymbol,
+  isObject
+] = [
+  "string",
+  "number",
+  "undefined",
+  "function",
+  "boolean",
+  "symbol",
+  "object"
+].map(isType)
+
+const F = {
+  isString,
+  isNumber,
+  isUndefined,
+  isFunction,
+  isBoolean,
+  isSymbol,
+  isObject,
+  toString,
   // CORE
   $,
   __: $,
+  def,
   curry,
+  curryN,
   pipe: (...fns) => (x) => fns.reduce((prev, fn) => fn(prev), x),
-  // NATIVE
+  memoizeWith,
   keys: Object.keys,
-  concat: curry((a, b) => a.concat(b)),
+  concat: curry(concat),
   map: curry((fn, xx) => xx.map(fn)),
   filter: curry((fn, xx) => xx.filter(fn)),
+  reject: curry((fn, xx) => xx.filter((yy) => !fn(yy))),
   reduce: curry((fn, init, xx) => xx.reduce(fn, init)),
-  some: curry((fn, xx) => xx.some(fn)), // alias: any
+  some: any, // alias: any
+  toPairs: (oo) => Object.keys(oo).map((k) => [k, oo[k]]),
+  fromPairs: (ps) => ps.reduce((oo, [ke, va]) => mash(oo, { [ke]: va }), {}),
+  range: curry((aa, zz) => {
+    const out = []
+    const down = zz < aa
+    for (let ix = aa; down ? ix >= zz : ix <= zz; down ? ix-- : ix++) {
+      out.push(ix)
+    }
+    return out
+  }),
   // STRING
   toUpper: (z) => z.toUpperCase(),
   toLower: (z) => z.toLowerCase(),
+  // ITERABLE
+  last,
+  slice: curry((aa, bb, xx) => xx.slice(aa, bb)),
   // LOGIC
+  not: (yy) => !yy,
+  complement: (fn) => (...x) => !fn(...x),
   both: curry((aPred, bPred, x) => aPred(x) && bPred(x)),
   and: curry((a, b) => a && b),
   equals: curry((a, b) => a === b),
@@ -54,51 +221,69 @@ const J = {
   add: curry((b, a) => a + b),
   subtract: curry((b, a) => a - b),
   divide: curry((b, a) => a / b),
-  times: curry((b, a) => a * b),
+  multiply: curry((b, a) => a * b),
   // COMBINATORY LOGIC
-  identity: (x) => x,
+  identity,
   always: (kk) => () => kk,
   flip: (fn) => curry((a, b) => fn(b, a))
 }
+F.uniq = F.reduce((agg, xx) => (!agg.includes(xx) ? agg.concat(xx) : agg), [])
+
+// PREDICATES
+F.anyPass = curry((preds, xx) =>
+  F.pipe(F.map(F.flip(F.some)(xx)), F.smooth, (z) => z.length > 0)(preds)
+)
 
 // ACCESSORS
-J.anyPass = curry((preds, xx) =>
-  J.pipe(
-    J.map(J.flip(J.some)(xx)), //(tt) => J.some(tt)(xx)),
-    J.filter(J.I),
-    (z) => z.length > 0
-  )(preds)
+F.pathOr = curry((dd, ks, src) =>
+  F.reduce((agg, st) => (agg && agg[st]) || dd, src, ks)
 )
+const deriveFromAccessor = (acc) => ({
+  unsafe: acc(null),
+  eq: curry((ks, ex, src) => F.pipe(acc(UNMATCHED, ks), F.equals(ex))(src)),
+  satisfies: curry((fn, ks, src) =>
+    F.pipe(acc(UNMATCHED, ks), fn, Boolean)(src)
+  )
+})
+const {
+  unsafe: path,
+  eq: pathEq,
+  satisfies: pathSatisfies
+} = deriveFromAccessor(F.pathOr)
+F.path = path
+F.pathEq = pathEq
+F.pathSatisfies = pathSatisfies
 
-J.pathOr = curry((def, keys, source) =>
-  J.reduce((agg, step) => (agg && agg[step]) || def, source, keys)
-)
-J.path = J.pathOr(null)
-J.pathEq = curry((ks, ex, src) => J.pipe(J.pathOr(NIL, ks), J.equals(ex))(src))
-J.pathSatisfies = curry((fn, keys, source) =>
-  J.pipe(J.path(keys), fn, Boolean)(source)
-)
+F.propOr = curry((dd, key, source) => F.pathOr(dd, [key], source))
+const {
+  unsafe: prop,
+  eq: propEq,
+  satisfies: propSatisfies
+} = deriveFromAccessor(F.propOr)
+F.prop = prop
+F.propEq = propEq
+F.propSatisfies = propSatisfies
 
 // not in ramda
-J.freeze = Object.freeze
-J.box = (z) => [z]
+F.smooth = smooth
+F.freeze = Object.freeze
+F.box = (z) => [z]
 // in xtrace
-J.sideEffect = curry((fn, a) => {
+F.sideEffect = curry((fn, a) => {
   fn(a)
   return a
 })
-J.sideEffect2 = curry((fn, a, b) => {
+F.sideEffect2 = curry((fn, a, b) => {
   fn(a, b)
   return b
 })
-J.trace = J.sideEffect2(console.log)
+F.trace = F.sideEffect2(console.log)
 
 // aliases
-J.I = J.identity
-J.K = J.always
-J.constant = J.K
-J.some = J.any
+F.I = identity
+F.K = F.always
+F.constant = F.K
+F.any = F.some
 
-// const JUMPSUIT = J.freeze(J)
-export const JUMPSUIT = J.freeze(J)
-export default JUMPSUIT
+export const FUTILITY = F.freeze(F)
+export default FUTILITY

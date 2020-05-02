@@ -26,7 +26,8 @@
     "jest": "^25.4.0",
     "prettier": "^2.0.5",
     "prettier-eslint": "^9.0.1",
-    "text-case": "^1.0.7"
+    "text-case": "^1.0.7",
+    "xtrace": "^0.3.0"
   },
   "scripts": {
     "start": "nps"

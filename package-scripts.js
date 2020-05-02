@@ -1,5 +1,9 @@
 module.exports = {
   scripts: {
-    test: 'jest'
+    test: {
+      description: 'test stuff',
+      script: 'jest',
+      watch: 'jest --watch'
+    }
   }
 };
