@@ -1,12 +1,27 @@
-import getMethodBody from "../selectors/accessors/get-method-body"
-import getMethodName from "../selectors/accessors/get-method-name"
-import getMethodParams from "../selectors/accessors/get-method-params"
-import getClassName from "../selectors/accessors/get-class-name"
+import { prop } from "ramda"
+import getMethodBody from "../tools/ast/accessors/get-method-body"
+import getMethodName from "../tools/ast/accessors/get-method-name"
+import getMethodParams from "../tools/ast/accessors/get-method-params"
+import getClassName from "../tools/ast/accessors/get-class-name"
+import isThisBound from "../tools/ast/predicates/is-bound-to-this"
+import isMethodInvocation from "../tools/ast/predicates/is-callexpression"
 
 export default function transformer(file, api) {
   const jjj = api.jscodeshift
   const state = {}
   const funcs = []
+
+  const thisBoundMethods = []
+  jjj(file.source)
+    .find(jjj.Identifier)
+    .filter((z) => {
+      return isThisBound(z) && isMethodInvocation(z)
+    })
+    .forEach((z) => thisBoundMethods.push(z))
+  console.log(
+    "this.* calls :::",
+    thisBoundMethods.map((z) => jjj(z).toSource()).join("\n")
+  )
   jjj(file.source)
     .find(jjj.MethodDefinition)
     .forEach((z) => {
@@ -26,11 +41,11 @@ export default function transformer(file, api) {
       const hasConstructor = state[className + "Constructor"]
       const params = getMethodParams(x)
       const body = getMethodBody(x)
+      const bods = [hasConstructor[1], body]
+      console.log("bods", bods.map(prop("body")))
       const funcBody = jjj.arrowFunctionExpression(
         params,
-        isRender && hasConstructor
-          ? jjj.blockStatement([hasConstructor[1], body])
-          : body
+        isRender && hasConstructor ? jjj.blockStatement(bods) : body
       )
 
       const newName = jjj.identifier(isRender ? className : name)

@@ -1,7 +1,5 @@
-import R from "ramda"
-import getLiteralArrayValues from "../selectors/accessors/get-arrayexpression-elements"
-import isArray from "../selectors/predicates/is-array"
-import getArrayElements from "../selectors/accessors/get-array-elements"
+import isArray from "../tools/ast/predicates/is-array"
+import getArrayElements from "../tools/ast/accessors/get-array-elements"
 
 export default function transformer(file, api) {
   const jjj = api.jscodeshift

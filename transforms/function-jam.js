@@ -1,22 +1,22 @@
-import { prop, map, pipe, propEq, curry, reduce } from "ramda"
+import { prop, pipe, propEq, reduce } from "ramda"
 import { camelCase } from "text-case"
-import isVD from "../selectors/predicates/is-variabledeclarator"
-import getVDBody from "../selectors/accessors/get-variabledeclarator-body"
-import getVDParams from "../selectors/accessors/get-variabledeclarator-params"
-import getVDName from "../selectors/accessors/get-variabledeclarator-name"
 import { inspect } from "xtrace"
+import { AST } from "../tools/constants"
+import isVD from "../tools/ast/predicates/is-variabledeclarator"
+import getVDBody from "../tools/ast/accessors/get-variabledeclarator-body"
+import getVDParams from "../tools/ast/accessors/get-variabledeclarator-params"
+import getVDName from "../tools/ast/accessors/get-variabledeclarator-name"
+import makeFunction from "../tools/ast/generators/make-function"
 
-const isReturnStatement = propEq("type", "ReturnStatement")
+const { ReturnStatement: $RS } = AST
+
+const j2 = (x) => JSON.stringify(x, null, 2)
+
+const isReturnStatement = propEq("type", $RS)
 export default function transformer(file, api) {
   const j = api.jscodeshift
   const news = []
 
-  const makeFunction = curry((name, par, simulacra) => {
-    const func = j.arrowFunctionExpression(par, simulacra)
-    return j.variableDeclaration("const", [
-      j.variableDeclarator(j.identifier(name), func)
-    ])
-  })
   j(file.source)
     .find(j.Identifier)
     .filter(isVD)
@@ -40,8 +40,8 @@ export default function transformer(file, api) {
     ),
     ({ names, params, bodies }) => {
       const name = camelCase(names.join(" "))
-      // centipede
-      const body = pipe(
+      // filth
+      const centipede = pipe(
         reduce((agg, xx) => agg.concat(xx.body), []),
         /*
         inspect(
@@ -50,30 +50,37 @@ export default function transformer(file, api) {
         ),
         */
         (z) => {
+          // sorting is in-place, so we make a copy
           const y = [].concat(z)
+          // return at the end, y'all
           y.sort((a, b) => {
             const [rA, rB] = [a, b].map(isReturnStatement)
             if (rA && !rB) return 1
             if (!rA && rB) return -1
             return 0
           })
+          // grab the first return statement's index
           let ii = 0
           let found = false
           while (ii < y.length && !found) {
             ++ii
             if (isReturnStatement(y[ii])) found = true
           }
+          // grab the returns, hear people's arguments
           const returns = y.slice(ii, Infinity).map(prop("argument"))
+          // yield profit?
           return y
             .slice(0, ii)
             .concat([j.returnStatement(j.arrayExpression(returns))])
-        },
+        }
+        /*
         inspect(
           map((b) => b.type),
           "output"
         )
+        */
       )(bodies)
-      return makeFunction(name, params, j.blockStatement(body))
+      return makeFunction(j, name, params, j.blockStatement(centipede))
     },
     (z) => j(z).toSource()
   )(news)
