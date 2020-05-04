@@ -382,3 +382,12 @@ test("memoizeWith", () => {
   expect(mTriple(1, 2, 3)).toEqual((1 + 2) / 3)
   expect(lockbox).toEqual({ "1-2-3": 1, "2-3-4": 5 / 4 })
 })
+
+test("nth", () => {
+  const THE_LIST = "abcdef".split("")
+  expect(J.nth(1, THE_LIST)).toEqual("b")
+  expect(J.nth(-1, THE_LIST)).toEqual("f")
+  expect(J.nth(-2, THE_LIST)).toEqual("e")
+  expect(J.nth(2, THE_LIST)).toEqual("c")
+  expect(J.nth(100, THE_LIST)).toBeFalsy()
+})

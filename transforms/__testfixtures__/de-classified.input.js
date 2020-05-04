@@ -1,4 +1,6 @@
-class Gross extends Component {
+import React, { Component } from "react"
+
+class MyComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -7,6 +9,17 @@ class Gross extends Component {
       isMemoVisible: props.ad.memo,
       recosVisible: false
     }
+  }
+  otherFunctionReferencingFunction(x) {
+    this.yetAnotherMethod("more method")
+    console.log("even harder", this.nonRenderFunction("oooo"))
+    return this.nonRenderFunction(x)
+  }
+  nonRenderFunction(x) {
+    return "cool" + x
+  }
+  yetAnotherMethod(whatever) {
+    return ["nope", whatever]
   }
   renderSubElement({ children }) {
     return <strong>{children}</strong>
@@ -18,3 +31,5 @@ class Gross extends Component {
     return <div>{this.renderSubElement("codesmell")}</div>
   }
 }
+
+export default MyComponent

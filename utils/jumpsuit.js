@@ -207,6 +207,9 @@ const F = {
   toLower: (z) => z.toLowerCase(),
   // ITERABLE
   last,
+  nth: curry((ix, xx) =>
+    ix < 0 && xx.length + ix ? xx[xx.length + ix] : xx[ix]
+  ),
   slice: curry((aa, bb, xx) => xx.slice(aa, bb)),
   // LOGIC
   not: (yy) => !yy,
