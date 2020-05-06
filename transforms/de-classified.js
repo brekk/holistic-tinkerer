@@ -1,4 +1,13 @@
-import { pipe, map, uniq, pathSatisfies, path, pathEq, pathOr } from "ramda"
+import {
+  both,
+  pipe,
+  map,
+  uniq,
+  pathSatisfies,
+  path,
+  pathEq,
+  pathOr
+} from "ramda"
 import getMethodBody from "../tools/ast/accessors/get-method-body"
 import getMethodName from "../tools/ast/accessors/get-method-name"
 import getMethodParams from "../tools/ast/accessors/get-method-params"
@@ -15,22 +24,28 @@ export default function transformer(file, api) {
   const thisBoundMethods = []
   jjj(file.source)
     .find(jjj.Identifier)
-    .filter((z) => {
-      return isThisBound(z) && isMethodInvocation(z)
+    .forEach((z) => {
+      if (isThisBound(z) && isMethodInvocation(z)) {
+        thisBoundMethods.push(z)
+      }
     })
-    .forEach((z) => thisBoundMethods.push(z))
   const boundMethodNames = pipe(
     map(path(["value", "name"])),
     uniq
   )(thisBoundMethods)
   console.log("boundMethodNames!\n\n - " + boundMethodNames.join("\n - "))
-  /*
-  const altered = jjj(file.source)
+  const fixed = jjj(file.source)
     .find(jjj.MemberExpression)
-    .filter(pathEq(["value", "object", "type"], "ThisExpression"))
+    .filter(
+      both(
+        pathEq(["value", "object", "type"], "ThisExpression"),
+        pathEq(["parentPath", "value", "type"], "CallExpression")
+      )
+    )
     .replaceWith((z) => jjj.identifier(path(["value", "property", "name"], z)))
-  */
-  jjj(file.source)
+    .toSource()
+
+  jjj(fixed)
     .find(jjj.MethodDefinition)
     .forEach((z) => {
       const methodName = getMethodName(z)

@@ -3,7 +3,7 @@ import React from 'react'
 const otherFunctionReferencingFunction = x => {
   yetAnotherMethod("more method")
   console.log("even harder", nonRenderFunction("oooo"))
-  return nonRenderFunction(x)
+  return nonRenderFunction(x);
 };
 
 const nonRenderFunction = x => {
@@ -29,5 +29,5 @@ const MyComponent = () => {
       isMemoVisible: props.ad.memo,
       recosVisible: false
     }
-    return <div><MyComponentSubElement>codesmell</MyComponentSubElement></div>
+    return <div><MyComponentSubElement>codesmell</MyComponentSubElement></div>;
 };
