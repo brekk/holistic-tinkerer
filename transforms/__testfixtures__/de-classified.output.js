@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { Component } from "react"
+
+export const other = "WHATEVER"
 
 const otherFunctionReferencingFunction = x => {
   yetAnotherMethod("more method")
@@ -22,7 +24,7 @@ const MyComponentOther = () => {
   return <strong>shit</strong>
 };
 
-const MyComponent = () => {
+export const MyComponent = () => {
     this.state = {
       isMemoEditing: false,
       status: "init",
@@ -31,3 +33,5 @@ const MyComponent = () => {
     }
     return <div><MyComponentSubElement>codesmell</MyComponentSubElement></div>;
 };
+
+export default MyComponent

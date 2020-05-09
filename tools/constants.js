@@ -263,3 +263,5 @@ export const AST = Object.freeze({
   WithStatement: "WithStatement",
   YieldExpression: "YieldExpression"
 })
+
+export default AST

@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 
-class MyComponent extends Component {
+export const other = "WHATEVER"
+
+export class MyComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
