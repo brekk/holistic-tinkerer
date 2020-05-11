@@ -58,10 +58,18 @@ export default function transformer(file, api) {
   const outputLines = []
   const thisBoundMethods = []
   const exportedClasses = []
-  // console.log(
-  //   "LOOKING FOR SOME NODES?",
-  //   pipe(keys, map(toLower), filter(includes("export")))(jjj)
-  // )
+
+  const findSomeNodes = (named) =>
+    pipe(keys, filter(pipe(toLower, includes(named))))(jjj)
+  /*
+  console.log(
+    "find some nodes, bro",
+    findSomeNodes("declaration"),
+    jjj(file.source).find(
+      jjj.ExportNamedDeclaration,
+      jjj.ExportDefaultDeclaration
+    )
+  )*/
   // TODO: simplify "ALL NODES WHICH AREN'T CLASSES"
   jjj(file.source)
     .find(jjj.ImportDeclaration)
